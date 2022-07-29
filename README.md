@@ -1,4 +1,4 @@
-Repository with an example of using the "Abstract Factory" pattern.
+Repository with an example of using the "Command" pattern.
 
 <b>Theme:</b> Remote control
 
