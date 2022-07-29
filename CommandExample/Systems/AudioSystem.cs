@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CommandExample.Systems
 {
-    internal class AudioSystem : ISystem
+    internal class AudioSystem
     {
         SystemStates.State generalState;
         AudioSystemState currentAudioSystemState;

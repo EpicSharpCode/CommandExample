@@ -13,6 +13,7 @@ namespace CommandExample.Commands
         void Toggle();
         void Exit();
         void Undo();
+        void Redo();
         SystemStates.State GetGeneralState();
     }
 }

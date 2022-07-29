@@ -54,6 +54,7 @@ namespace CommandExample
             Console.WriteLine("1 - Включить");
             Console.WriteLine("2 - Переключить");
             Console.WriteLine("3 - Отменить последнее действие");
+            Console.WriteLine("4 - Вернуть последнее действие");
         }
 
     }

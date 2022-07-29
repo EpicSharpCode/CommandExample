@@ -62,6 +62,11 @@ namespace CommandExample.Remote
                         selectedCommand.Undo();
                         break;
                     }
+                case 4:
+                    {
+                        selectedCommand.Redo();
+                        break;
+                    }
             }
         }
     }

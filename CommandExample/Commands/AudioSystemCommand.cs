@@ -11,11 +11,13 @@ namespace CommandExample.Commands
     internal class AudioSystemCommand : ICommand
     {
         AudioSystem audioSystem;
-        Stack<AudioSystemState> previousStates;
+        Stack<AudioSystemState> undoStates;
+        Stack<AudioSystemState> redoStates;
 
         public AudioSystemCommand(AudioSystem _audioSystem) 
         {
-            previousStates = new Stack<AudioSystemState>();
+            undoStates = new Stack<AudioSystemState>();
+            redoStates = new Stack<AudioSystemState>();
             audioSystem = _audioSystem;
         }
 
@@ -26,8 +28,9 @@ namespace CommandExample.Commands
 
         public void Toggle()
         {
-            previousStates.Push(audioSystem.GetCurremtAudioSystemState());
+            undoStates.Push(audioSystem.GetCurremtAudioSystemState());
             audioSystem.Toggle();
+            redoStates.Clear();
         }
 
         public void Exit()
@@ -37,13 +40,20 @@ namespace CommandExample.Commands
 
         public void Undo()
         {
-            if(previousStates.Count == 0) { return; }
-            audioSystem.SetAudioSystemState(previousStates.Pop());
+            if(undoStates.Count == 0) { return; }
+            redoStates.Push(audioSystem.GetCurremtAudioSystemState());
+            audioSystem.SetAudioSystemState(undoStates.Pop());
+        }
+        public void Redo()
+        {
+            if (redoStates.Count == 0) { return; }
+            undoStates.Push(audioSystem.GetCurremtAudioSystemState());
+            audioSystem.SetAudioSystemState(redoStates.Pop());
         }
 
         public override string ToString()
         {
-            return "Управление Аудио Системой";
+            return "Управление Аудиосистемой";
         }
 
         public SystemStates.State GetGeneralState() => audioSystem.GetGeneralState();
